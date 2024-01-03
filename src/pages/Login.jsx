@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/AuthProvider";
 
 export default function Login() {
   const {
@@ -11,6 +12,12 @@ export default function Login() {
 
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+
+  const { isAuthenticated, setIsAuthenticated } = useAuth();
+
+  if (isAuthenticated) {
+    return <Navigate to="/" />;
+  }
 
   const loginUser = async (data) => {
     const url = "http://localhost:8080/api/user/login";
@@ -29,6 +36,7 @@ export default function Login() {
       }
       const data = await response.text();
       localStorage.setItem("tokenPrueba", data);
+      setIsAuthenticated(true);
       navigate("/dashboard");
     } catch (error) {
       console.error(error);
@@ -79,7 +87,7 @@ export default function Login() {
           <p className="mb-5 text-red-500">{error && <span>{error}</span>}</p>
         </form>
         <Link
-          to={"/dashboard"}
+          to={"/"}
           className="font-bold text-black transition-colors hover:text-[#e02957] hover:underline"
         >
           Volver al dashboard

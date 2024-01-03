@@ -4,7 +4,7 @@ import Loading from "../util/Loading";
 import Book from "../components/Book";
 import Navbar from "../components/Navbar";
 
-export default function Dashboard() {
+export default function DashboardPublic() {
   const [allbooks, setAllBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
