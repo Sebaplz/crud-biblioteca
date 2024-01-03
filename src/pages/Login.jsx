@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Login() {
   const {
@@ -13,7 +13,7 @@ export default function Login() {
   const navigate = useNavigate();
 
   const loginUser = async (data) => {
-    const url = "http://localhost:8080/auth/login";
+    const url = "http://localhost:8080/api/user/login";
     const options = {
       method: "POST",
       headers: { "content-type": "application/json" },
@@ -21,9 +21,14 @@ export default function Login() {
     };
 
     try {
-      /* const response = await fetch(url, options);
-      const data = await response.json();
-      localStorage.setItem("tokenPrueba", JSON.stringify(data)); */
+      const response = await fetch(url, options);
+      if (!response.ok) {
+        const errorData = await response.json();
+        setError(errorData.error);
+        return;
+      }
+      const data = await response.text();
+      localStorage.setItem("tokenPrueba", data);
       navigate("/dashboard");
     } catch (error) {
       console.error(error);
@@ -34,7 +39,7 @@ export default function Login() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-gradient-to-r from-[#2e86c1] to-[#48c9b0]">
+    <main className="flex min-h-screen items-center justify-center">
       <section className="m-5 w-full rounded-lg bg-white p-5 shadow-lg md:w-[450px]">
         <div className="flex justify-end p-2">
           <img src="Logo_rojo.webp" alt="Logo" className="w-20" />
@@ -66,13 +71,19 @@ export default function Login() {
           />
           <p className="mb-5 text-red-500">{errors.password?.message}</p>
           <button
-            className="h-12 w-full rounded-lg bg-[#2e86c1] text-white"
+            className="h-12 w-full rounded-lg bg-[#e02957] font-bold text-white"
             type="submit"
           >
             Iniciar Sesión
           </button>
           <p className="mb-5 text-red-500">{error && <span>{error}</span>}</p>
         </form>
+        <Link
+          to={"/dashboard"}
+          className="font-bold text-black transition-colors hover:text-[#e02957] hover:underline"
+        >
+          Volver al dashboard
+        </Link>
       </section>
     </main>
   );
