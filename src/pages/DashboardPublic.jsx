@@ -1,49 +1,19 @@
-import { useEffect, useState } from "react";
 import Loading from "../util/Loading";
 /* import Pagination from "../util/Pagination"; */
 import Book from "../components/Book";
+import useAllBooks from "../hooks/useAllBooks";
+import { useAuth } from "../auth/AuthProvider";
+import { Navigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 
 export default function DashboardPublic() {
-  const [allbooks, setAllBooks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const { allbooks, isLoading, error } = useAllBooks();
 
-  const getAllBooks = async () => {
-    const url = "http://localhost:8080/api/books";
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      setAllBooks(data);
-    } catch (error) {
-      console.error(error);
-      setError("Error al cargar...");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const { isAuthenticated } = useAuth();
 
-  useEffect(() => {
-    getAllBooks();
-  }, []);
-
-  const deleteBook = async (id) => {
-    const url = `http://localhost:8080/api/books/delete/${id}`;
-    const options = {
-      method: "DELETE",
-    };
-
-    try {
-      const response = await fetch(url, options);
-      const data = await response.json();
-      console.log(data.message);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      getAllBooks();
-    }
-  };
-
+  if (isAuthenticated) {
+    return <Navigate to="/dashboard" />;
+  }
   return (
     <>
       <Navbar />
@@ -56,9 +26,11 @@ export default function DashboardPublic() {
         ) : (
           <>
             <ul className="grid w-full grid-cols-1 items-center justify-center gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {allbooks.map((book) => (
-                <Book key={book.id} book={book} onDelete={deleteBook} />
-              ))}
+              {allbooks.length == 0 ? (
+                <p>No hay libros para mostar!</p>
+              ) : (
+                allbooks.map((book) => <Book key={book.id} book={book} />)
+              )}
             </ul>
             {/* <Pagination /> */}
           </>

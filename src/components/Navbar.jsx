@@ -2,10 +2,10 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
 
 export default function Navbar() {
-  const { isAuthenticated, setIsAuthenticated } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
 
   const handleCerrarSesion = () => {
-    setIsAuthenticated(false);
+    logout();
   };
 
   return (
@@ -13,12 +13,12 @@ export default function Navbar() {
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between">
         <div className="flex items-center gap-4">
           <img src="/Logo_rojo.webp" alt="Logo ACL" className="w-20" />
-          <a
-            href="/"
+          <Link
+            to={"/dashboard"}
             className="hidden font-bold text-black transition-colors hover:text-[#e02957] hover:underline md:block"
           >
             Biblioteca Virtual
-          </a>
+          </Link>
         </div>
         {isAuthenticated ? (
           <Link

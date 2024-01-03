@@ -1,8 +1,16 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
+import Navbar from "./Navbar";
 
 export const ProtectedRoute = () => {
-  const auth = useAuth();
+  const { isAuthenticated } = useAuth();
 
-  return auth.isAuthenticated ? <Outlet /> : <Navigate to={"/"} />;
+  return isAuthenticated ? (
+    <>
+      <Navbar />
+      <Outlet />
+    </>
+  ) : (
+    <Navigate to={"/"} />
+  );
 };

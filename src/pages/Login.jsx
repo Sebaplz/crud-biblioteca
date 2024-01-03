@@ -13,10 +13,11 @@ export default function Login() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const { isAuthenticated, setIsAuthenticated } = useAuth();
+  const { isAuthenticated, login } = useAuth();
 
   if (isAuthenticated) {
-    return <Navigate to="/" />;
+    console.log(isAuthenticated);
+    return <Navigate to="/dashboard" />;
   }
 
   const loginUser = async (data) => {
@@ -35,8 +36,8 @@ export default function Login() {
         return;
       }
       const data = await response.text();
+      login();
       localStorage.setItem("tokenPrueba", data);
-      setIsAuthenticated(true);
       navigate("/dashboard");
     } catch (error) {
       console.error(error);
