@@ -1,8 +1,9 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import useAllBooks from "../hooks/useAllBooks";
 
-export default function TableAllBooks() {
-  const { allbooks, getAllBooks } = useAllBooks();
+export default function TableAllBooks({ currentBooks }) {
+  const { getAllBooks } = useAllBooks();
 
   const deleteBook = async (id) => {
     const url = `http://localhost:8080/api/books/delete/${id}`;
@@ -44,7 +45,7 @@ export default function TableAllBooks() {
           </tr>
         </thead>
         <tbody>
-          {allbooks.map((book) => (
+          {currentBooks.map((book) => (
             <tr key={book.id} className="border-b odd:bg-white even:bg-gray-50">
               <th
                 scope="row"
@@ -70,7 +71,7 @@ export default function TableAllBooks() {
                 </Link>
                 <button
                   onClick={() => deleteBook(book.id)}
-                  className="font-medium text-[#e02957] hover:underline"
+                  className="pr-4 font-medium text-[#e02957] hover:underline"
                 >
                   Eliminar
                 </button>
