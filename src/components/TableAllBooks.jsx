@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import useAllBooks from "../hooks/useAllBooks";
 
 export default function TableAllBooks() {
@@ -53,11 +54,13 @@ export default function TableAllBooks() {
                 scope="row"
                 className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
               >
-                <img
-                  src={book.imagen}
-                  alt={book.nombre}
-                  className="h-20 w-20 rounded-lg"
-                />
+                <Link to={`/${book.id}`}>
+                  <img
+                    src={book.imagen}
+                    alt={book.nombre}
+                    className="h-20 w-20 rounded-lg"
+                  />
+                </Link>
               </th>
               <td className="px-6 py-4">{book.nombre}</td>
               <td className="px-6 py-4">{book.autor}</td>

@@ -8,6 +8,7 @@ import DashboardPublic from "./pages/DashboardPublic";
 import AddBook from "./pages/AddBook";
 import { ProtectedRoute } from "./components/ProtectedRoute";
 import DashboardPrivate from "./pages/DashboardPrivate";
+import InfoBook from "./pages/InfoBook";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/:id",
+    element: <InfoBook />,
   },
   {
     element: <ProtectedRoute />,

@@ -1,5 +1,7 @@
+import { IconArrowBackUp } from "@tabler/icons-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
 
 const AddBook = () => {
   const [info, setInfo] = useState(null);
@@ -35,11 +37,13 @@ const AddBook = () => {
   };
 
   return (
-    <>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        className="mx-auto max-w-md pt-40"
-      >
+    <main className="mx-auto max-w-5xl pt-40">
+      <div className="flex">
+        <Link to={"/"}>
+          <IconArrowBackUp color="#e02957" size={30} />
+        </Link>
+      </div>
+      <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-md">
         <div className="mb-5">
           <label
             htmlFor="nombre"
@@ -55,6 +59,7 @@ const AddBook = () => {
             placeholder="Harry Potter"
             className="w-full rounded-lg border p-2"
           />
+          <p className="mb-5 text-red-500">{errors.nombre?.message}</p>
         </div>
         <div className="mb-5">
           <label
@@ -71,6 +76,7 @@ const AddBook = () => {
             placeholder="J. K. Rowling"
             className="w-full rounded-lg border p-2"
           />
+          <p className="mb-5 text-red-500">{errors.autor?.message}</p>
         </div>
         <div className="mb-5">
           <label
@@ -92,6 +98,7 @@ const AddBook = () => {
             placeholder="$5000"
             className="w-full rounded-lg border p-2"
           />
+          <p className="mb-5 text-red-500">{errors.precio?.message}</p>
         </div>
         <div className="mb-5">
           <label
@@ -107,7 +114,7 @@ const AddBook = () => {
             id="sinopsis"
             placeholder="lorem ipsum..."
             className="w-full rounded-lg border p-2"
-            maxLength={200}
+            maxLength={250}
           />
           <p className="text-red-500">{errors.sinopsis?.message}</p>
         </div>
@@ -126,6 +133,7 @@ const AddBook = () => {
             placeholder="url/imagen"
             className="w-full rounded-lg border p-2"
           />
+          <p className="mb-5 text-red-500">{errors.imagen?.message}</p>
         </div>
         <button
           type="submit"
@@ -135,7 +143,7 @@ const AddBook = () => {
         </button>
       </form>
       {info && <p className="mt-4 text-center">{info}</p>}
-    </>
+    </main>
   );
 };
 
