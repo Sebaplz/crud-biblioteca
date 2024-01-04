@@ -8,13 +8,11 @@ export default function InfoBook() {
   const [book, setBook] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
-  const params = useParams();
+  const { id } = useParams();
 
   const fetchBook = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/books/${params.id}`,
-      );
+      const response = await fetch(`http://localhost:8080/api/books/${id}`);
       if (!response.ok) {
         setError(response.text);
       }
@@ -44,9 +42,9 @@ export default function InfoBook() {
             </Link>
           </div>
           <div className="flex justify-center gap-4">
-            <img src={book.imagen} alt={book.nombre} />
+            <img src={book.imagen} alt={book.nombre} className="h-80 w-64" />
             <div>
-              <h2 className="text-4xl">{book.nombre}</h2>
+              <h2 className="max-w-md text-4xl">{book.nombre}</h2>
               <h3 className="text-lg">{book.autor}</h3>
               <p className="mt-8 max-w-lg">Sinopsis: {book.sinopsis}</p>
               <p className="mt-16">Precio: ${book.precio}</p>

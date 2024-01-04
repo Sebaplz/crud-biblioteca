@@ -1,35 +1,58 @@
 import { IconArrowBackUp } from "@tabler/icons-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-const AddBook = () => {
+const EditBook = () => {
+  const { id } = useParams();
   const [info, setInfo] = useState(null);
   const {
     register,
     handleSubmit,
-    reset,
+    setValue,
     formState: { errors },
   } = useForm();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchBook = async () => {
+      try {
+        const response = await fetch(`http://localhost:8080/api/books/${id}`);
+        const data = await response.json();
+
+        setValue("nombre", data.nombre);
+        setValue("autor", data.autor);
+        setValue("precio", data.precio);
+        setValue("sinopsis", data.sinopsis);
+        setValue("imagen", data.imagen);
+      } catch (error) {
+        console.error("Error al obtener la información del libro:", error);
+      }
+    };
+
+    fetchBook();
+  }, [id, setValue]);
 
   const onSubmit = async (data) => {
     const options = {
-      method: "POST",
+      method: "PUT",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(data),
     };
 
     try {
       const response = await fetch(
-        "http://localhost:8080/api/books/new",
+        `http://localhost:8080/api/books/edit/${id}`,
         options,
       );
 
       if (response.ok) {
-        setInfo("Libro agregado correctamente");
-        reset();
+        setInfo("Libro actualizado correctamente");
+        setTimeout(() => {
+          navigate("/dashboard");
+        }, 1000);
       } else {
-        setInfo("Error al agregar el libro");
+        setInfo("Error al actualizar el libro");
       }
     } catch (error) {
       console.error("Error en la solicitud:", error);
@@ -139,7 +162,7 @@ const AddBook = () => {
           type="submit"
           className="rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105"
         >
-          Agregar Libro
+          Actualizar Libro
         </button>
       </form>
       {info && <p className="mt-4 text-center">{info}</p>}
@@ -147,4 +170,4 @@ const AddBook = () => {
   );
 };
 
-export default AddBook;
+export default EditBook;

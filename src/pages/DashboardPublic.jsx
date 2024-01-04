@@ -20,7 +20,7 @@ export default function DashboardPublic() {
       {error && (
         <p className="text-center font-semibold text-red-600">{error}</p>
       )}
-      <main className="mx-auto max-w-5xl pt-40">
+      <main className="mx-auto max-w-5xl pb-10 pt-40">
         {isLoading ? (
           <Loading />
         ) : (

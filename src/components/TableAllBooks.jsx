@@ -21,10 +21,6 @@ export default function TableAllBooks() {
     }
   };
 
-  const editBook = () => {
-    console.log("editar");
-  };
-
   return (
     <div className="relative mx-4 overflow-x-auto rounded-lg shadow-md lg:mx-0">
       <table className="w-full text-left text-sm text-gray-500">
@@ -64,14 +60,14 @@ export default function TableAllBooks() {
               </th>
               <td className="px-6 py-4">{book.nombre}</td>
               <td className="px-6 py-4">{book.autor}</td>
-              <td className="px-6 py-4">{book.precio}</td>
+              <td className="px-6 py-4">${book.precio.toLocaleString()}</td>
               <td className="flex h-[6.5rem] items-center gap-4">
-                <button
-                  onClick={() => editBook(book.id)}
+                <Link
+                  to={`/edit/${book.id}`}
                   className="font-medium text-blue-600 hover:underline"
                 >
                   Editar
-                </button>
+                </Link>
                 <button
                   onClick={() => deleteBook(book.id)}
                   className="font-medium text-[#e02957] hover:underline"

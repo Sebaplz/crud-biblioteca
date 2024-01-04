@@ -12,7 +12,7 @@ export default function DashboardPrivate() {
         <Loading />
       ) : (
         <>
-          <main className="mx-auto max-w-5xl pt-32">
+          <main className="mx-auto max-w-5xl pb-10 pt-32">
             <div className="flex justify-end">
               <Link
                 to={"/addbook"}

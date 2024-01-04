@@ -9,7 +9,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed w-full bg-white p-4 text-black lg:py-4">
+    <nav className="fixed z-50 w-full bg-white p-4 text-black lg:py-4">
       <div className="mx-auto flex w-full max-w-5xl items-center justify-between">
         <div className="flex items-center gap-4">
           <img src="/Logo_rojo.webp" alt="Logo ACL" className="w-20" />

@@ -8,9 +8,9 @@ export default function Book({ book }) {
         <img
           src={book.imagen}
           alt={`Imagen del libro ${book.nombre}`}
-          className="h-80 w-72 rounded-lg object-center"
+          className="h-60 w-52 rounded-lg object-center"
         />
-        <h2>{book.nombre}</h2>
+        <h2 className="text-center">{book.nombre}</h2>
       </li>
     </Link>
   );
