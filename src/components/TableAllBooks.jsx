@@ -1,29 +1,9 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
-import useAllBooks from "../hooks/useAllBooks";
 
-export default function TableAllBooks({ currentBooks }) {
-  const { getAllBooks } = useAllBooks();
-
-  const deleteBook = async (id) => {
-    const url = `http://localhost:8080/api/books/delete/${id}`;
-    const options = {
-      method: "DELETE",
-    };
-
-    try {
-      const response = await fetch(url, options);
-      const data = await response.json();
-      console.log(data.message);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      getAllBooks();
-    }
-  };
-
+export default function TableAllBooks({ currentBooks, deleteBook }) {
   return (
-    <div className="relative mx-4 overflow-x-auto rounded-lg shadow-md lg:mx-0">
+    <div className="relative mx-4 overflow-x-auto rounded-lg shadow-md lg:mx-2 2xl:mx-0">
       <table className="w-full text-left text-sm text-gray-500">
         <thead className="bg-gray-50 text-xs uppercase text-gray-700">
           <tr>

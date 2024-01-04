@@ -26,7 +26,7 @@ const Pagination = ({
               currentPage === 1 ? "pointer-events-none" : ""
             } ms-0 flex h-8 items-center justify-center rounded-s-lg border border-e-0 border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700`}
           >
-            Previous
+            Anterior
           </button>
         </li>
         {[...Array(totalPages).keys()].map((page) => (
@@ -48,7 +48,7 @@ const Pagination = ({
               currentPage === totalPages ? "pointer-events-none" : ""
             } flex h-8 items-center justify-center rounded-e-lg border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700`}
           >
-            Next
+            Siguiente
           </button>
         </li>
       </ul>

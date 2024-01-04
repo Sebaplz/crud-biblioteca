@@ -60,8 +60,8 @@ const EditBook = () => {
   };
 
   return (
-    <main className="mx-auto max-w-5xl pt-40">
-      <div className="flex">
+    <main className="mx-auto max-w-5xl px-4 pt-36 lg:px-0 lg:pt-40">
+      <div className="mb-4 flex lg:mb-0">
         <Link to={"/"}>
           <IconArrowBackUp color="#e02957" size={30} />
         </Link>
