@@ -12,8 +12,7 @@ const useAllBooks = () => {
       const data = await response.json();
       setAllBooks(data);
     } catch (error) {
-      console.error(error);
-      setError("Error al cargar...");
+      setError("No se pudo obtener la lista de libros!");
     } finally {
       setIsLoading(false);
     }
