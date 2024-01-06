@@ -35,9 +35,10 @@ export default function Login() {
         setError(errorData.error);
         return;
       }
-      const data = await response.text();
+      const data = await response.json();
       login();
-      localStorage.setItem("tokenPrueba", data);
+      localStorage.setItem("userRol", data.role);
+      localStorage.setItem("username", data.username);
       navigate("/dashboard");
     } catch (error) {
       console.error(error);

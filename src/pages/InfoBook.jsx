@@ -24,6 +24,8 @@ export default function InfoBook() {
     }
   };
 
+  const userRol = localStorage.getItem("userRol");
+
   useEffect(() => {
     fetchBook();
   }, []);
@@ -51,9 +53,27 @@ export default function InfoBook() {
               <h2 className="max-w-md text-4xl">{book.nombre}</h2>
               <h3 className="text-lg">{book.autor}</h3>
               <p className="mt-8 max-w-lg">Sinopsis: {book.sinopsis}</p>
-              <p className="mt-10 lg:mt-16">Precio: ${book.precio}</p>
+              <div className="mt-10 flex items-center gap-4 lg:mt-16">
+                <p>Precio: ${book.precio}</p>
+                <button
+                  className={`rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105 ${
+                    userRol === "USER"
+                      ? ""
+                      : "disabled:scale-100 disabled:bg-opacity-50 disabled:transition-none"
+                  }`}
+                  disabled={userRol !== "USER"}
+                  onClick={() => print()}
+                >
+                  Comprar
+                </button>
+              </div>
             </div>
           </div>
+          {!userRol && (
+            <p className="text-center text-red-500">
+              Debes iniciar sesión para comprar!
+            </p>
+          )}
         </main>
       )}
     </>

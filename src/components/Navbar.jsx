@@ -5,8 +5,11 @@ export default function Navbar() {
   const { isAuthenticated, logout } = useAuth();
 
   const handleCerrarSesion = () => {
+    localStorage.clear();
     logout();
   };
+
+  const username = localStorage.getItem("username");
 
   return (
     <nav className="fixed z-50 w-full bg-white p-4 text-black lg:py-4">
@@ -20,22 +23,25 @@ export default function Navbar() {
             Biblioteca Virtual
           </Link>
         </div>
-        {isAuthenticated ? (
-          <Link
-            to={"/"}
-            onClick={handleCerrarSesion}
-            className="rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105 lg:p-3"
-          >
-            Cerrar Sesión
-          </Link>
-        ) : (
-          <Link
-            to={"/login"}
-            className="rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105 lg:p-3"
-          >
-            Iniciar Sesión
-          </Link>
-        )}
+        <div className="flex items-center lg:gap-4">
+          {username && <p className="text-center">Bienvenido! {username}</p>}
+          {isAuthenticated ? (
+            <Link
+              to={"/"}
+              onClick={handleCerrarSesion}
+              className="rounded-md bg-[#e02957] p-2 text-center font-semibold text-white transition-transform hover:scale-105 lg:p-3"
+            >
+              Cerrar Sesión
+            </Link>
+          ) : (
+            <Link
+              to={"/login"}
+              className="rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105 lg:p-3"
+            >
+              Iniciar Sesión
+            </Link>
+          )}
+        </div>
       </div>
     </nav>
   );
