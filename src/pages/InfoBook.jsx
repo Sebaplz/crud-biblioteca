@@ -64,14 +64,14 @@ export default function InfoBook() {
                   disabled={userRol !== "USER"}
                   onClick={() => print()}
                 >
-                  Comprar
+                  Descargar
                 </button>
               </div>
             </div>
           </div>
           {!userRol && (
             <p className="text-center text-red-500">
-              Debes iniciar sesión para comprar!
+              Debes iniciar sesión para descargarlo!
             </p>
           )}
         </main>

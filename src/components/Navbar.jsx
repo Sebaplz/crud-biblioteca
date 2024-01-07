@@ -23,8 +23,12 @@ export default function Navbar() {
             Biblioteca Virtual
           </Link>
         </div>
-        <div className="flex items-center lg:gap-4">
-          {username && <p className="text-center">Bienvenido! {username}</p>}
+        <div className="flex items-center md:gap-4">
+          {username && (
+            <p className="text-center">
+              Bienvenido! <span className="font-bold">{username}</span>
+            </p>
+          )}
           {isAuthenticated ? (
             <Link
               to={"/"}

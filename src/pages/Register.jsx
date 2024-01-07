@@ -3,7 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
 import useUser from "../hooks/useUser";
 
-export default function Login() {
+export default function Register() {
   const {
     register,
     handleSubmit,
@@ -12,14 +12,15 @@ export default function Login() {
 
   const { isAuthenticated } = useAuth();
   const { handleAuthentication, error } = useUser();
-  const onSubmit = (data) => {
-    handleAuthentication(data, "login");
-  };
 
   if (isAuthenticated) {
     console.log(isAuthenticated);
     return <Navigate to="/dashboard" />;
   }
+
+  const onSubmit = (data) => {
+    handleAuthentication(data, "register");
+  };
 
   return (
     <main className="flex min-h-screen items-center justify-center">
@@ -31,6 +32,14 @@ export default function Login() {
           Biblioteca Virtual
         </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <input
+            {...register("username", {
+              required: "Username no puede estar vacio!",
+            })}
+            placeholder="username"
+            className="w-full rounded-lg border p-2"
+          />
+          <p className="mb-5 text-red-500">{errors.username?.message}</p>
           <input
             {...register("email", {
               required: "Email no puede estar vacio!",
@@ -57,7 +66,7 @@ export default function Login() {
             className="h-12 w-full rounded-lg bg-[#e02957] font-bold text-white"
             type="submit"
           >
-            Iniciar Sesión
+            Crear Cuenta
           </button>
           <p className="mb-5 text-red-500">{error && <span>{error}</span>}</p>
         </form>
@@ -69,10 +78,10 @@ export default function Login() {
             Volver al dashboard
           </Link>
           <Link
-            to={"/register"}
+            to={"/login"}
             className="text-center font-bold text-black transition-colors hover:text-[#e02957] hover:underline"
           >
-            Crea una cuenta!
+            Ya tengo una cuenta!
           </Link>
         </div>
       </section>

@@ -10,6 +10,7 @@ import { ProtectedRoute } from "./components/ProtectedRoute";
 import DashboardPrivate from "./pages/DashboardPrivate";
 import InfoBook from "./pages/InfoBook";
 import EditBook from "./pages/EditBook";
+import Register from "./pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <Login />,
+  },
+  {
+    path: "/register",
+    element: <Register />,
   },
   {
     path: "/:id",
