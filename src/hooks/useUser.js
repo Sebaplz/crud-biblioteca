@@ -28,9 +28,8 @@ const useUser = () => {
       localStorage.setItem("username", data.username);
       navigate("/dashboard");
     } catch (error) {
-      console.error(error);
       setError(
-        "Error al iniciar sesión. Por favor, verifica tus credenciales o inténtalo más tarde.",
+        `Error al realizar el ${url}. Por favor, verifica tus credenciales o inténtalo más tarde.`,
       );
     }
   };
