@@ -41,7 +41,7 @@ export default function InfoBook() {
           ) : (
             <main className="mx-auto max-w-5xl pt-36 lg:pt-40">
               <div className="flex">
-                <Link to={"/"}>
+                <Link to={"/dashboard"}>
                   <IconArrowBackUp color="#e02957" size={30} />
                 </Link>
               </div>

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
 
 export default function Navbar() {
-  const { isAuthenticated, logout, userName } = useAuth();
+  const { isAuthenticated, logout, userName, userRol } = useAuth();
 
   const handleCerrarSesion = () => {
     localStorage.clear();
@@ -27,7 +27,7 @@ export default function Navbar() {
               Bienvenido! <span className="font-bold">{userName}</span>
             </p>
           )}
-          {isAuthenticated ? (
+          {isAuthenticated && userRol ? (
             <Link
               to={"/"}
               onClick={handleCerrarSesion}

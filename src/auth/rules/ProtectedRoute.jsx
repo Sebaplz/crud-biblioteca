@@ -1,16 +1,22 @@
 import { Navigate, Outlet } from "react-router-dom";
 import Navbar from "../../components/Navbar";
 import { useAuth } from "../AuthProvider";
+import Loading from "../../util/Loading";
 
 export const ProtectedRoute = () => {
-  const { isAuthenticated, userRol } = useAuth();
-  if (isAuthenticated && userRol === "ADMIN") {
-    return (
-      <>
-        <Navbar />
-        <Outlet />
-      </>
-    );
+  const { isAuthenticated, userRol, loading } = useAuth();
+
+  if (!loading) {
+    if (isAuthenticated && userRol === "ADMIN") {
+      return (
+        <>
+          <Navbar />
+          <Outlet />
+          {console.log("paso por aca")}
+        </>
+      );
+    }
+    return <Navigate to={"/"} />;
   }
-  return <Navigate to={"/"} />;
+  return <Loading />;
 };

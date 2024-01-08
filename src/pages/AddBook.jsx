@@ -2,6 +2,7 @@ import { IconArrowBackUp } from "@tabler/icons-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { useAuth } from "../auth/AuthProvider";
 
 const AddBook = () => {
   const [info, setInfo] = useState(null);
@@ -12,6 +13,8 @@ const AddBook = () => {
     formState: { errors },
   } = useForm();
 
+  const { email } = useAuth();
+
   const onSubmit = async (data) => {
     const options = {
       method: "POST",
@@ -21,7 +24,7 @@ const AddBook = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8080/api/books/new",
+        `http://localhost:8080/api/books/new?email=${email}`,
         options,
       );
 
