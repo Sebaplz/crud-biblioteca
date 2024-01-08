@@ -3,16 +3,20 @@ import { Link, useParams } from "react-router-dom";
 import Loading from "../util/Loading";
 import { IconArrowBackUp } from "@tabler/icons-react";
 import Error from "../util/Error";
+import { useAuth } from "../auth/AuthProvider";
 
 export default function InfoBook() {
   const [book, setBook] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const { id } = useParams();
+  const { userRol } = useAuth();
 
   const fetchBook = async () => {
     try {
-      const response = await fetch(`http://localhost:8080/api/books/${id}`);
+      const response = await fetch(
+        `http://localhost:8080/api/books/book/${id}`,
+      );
       if (!response.ok) {
         setError(response.text);
       }
@@ -24,8 +28,6 @@ export default function InfoBook() {
       setIsLoading(false);
     }
   };
-
-  const userRol = localStorage.getItem("userRol");
 
   useEffect(() => {
     fetchBook();

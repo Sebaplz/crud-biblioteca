@@ -12,7 +12,6 @@ export const ProtectedRoute = () => {
         <>
           <Navbar />
           <Outlet />
-          {console.log("paso por aca")}
         </>
       );
     }

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 /* eslint-disable react/prop-types */
 export default function Book({ book }) {
   return (
-    <Link to={`/${book.id}`}>
+    <Link to={`/book/${book.id}`}>
       <li className="flex flex-col items-center">
         <img
           src={book.imagen}
