@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, Navigate } from "react-router-dom";
-import { useAuth } from "../auth/AuthProvider";
+import { Link } from "react-router-dom";
 import useUser from "../hooks/useUser";
 
 export default function Register() {
@@ -10,13 +9,7 @@ export default function Register() {
     formState: { errors },
   } = useForm();
 
-  const { isAuthenticated } = useAuth();
   const { handleAuthentication, error } = useUser();
-
-  if (isAuthenticated) {
-    console.log(isAuthenticated);
-    return <Navigate to="/dashboard" />;
-  }
 
   const onSubmit = (data) => {
     handleAuthentication(data, "register");

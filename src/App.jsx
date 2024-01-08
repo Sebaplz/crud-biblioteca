@@ -1,59 +1,33 @@
-import {
-  Navigate,
-  RouterProvider,
-  createBrowserRouter,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./pages/Login";
 import DashboardPublic from "./pages/DashboardPublic";
 import AddBook from "./pages/AddBook";
-import { ProtectedRoute } from "./components/ProtectedRoute";
+import { ProtectedRoute } from "./auth/rules/ProtectedRoute";
 import DashboardPrivate from "./pages/DashboardPrivate";
 import InfoBook from "./pages/InfoBook";
 import EditBook from "./pages/EditBook";
 import Register from "./pages/Register";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <DashboardPublic />,
-  },
-  {
-    path: "/*",
-    element: <Navigate to="/" />,
-  },
-  {
-    path: "/login",
-    element: <Login />,
-  },
-  {
-    path: "/register",
-    element: <Register />,
-  },
-  {
-    path: "/:id",
-    element: <InfoBook />,
-  },
-  {
-    element: <ProtectedRoute />,
-    children: [
-      {
-        path: "/dashboard",
-        element: <DashboardPrivate />,
-      },
-      {
-        path: "/addbook",
-        element: <AddBook />,
-      },
-      {
-        path: "/edit/:id",
-        element: <EditBook />,
-      },
-    ],
-  },
-]);
+import Layout from "./pages/Layout";
+/* import { ProtectedDashboard } from "./auth/rules/ProtectedDashboard"; */
 
 function App() {
-  return <RouterProvider router={router} />;
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<DashboardPublic />} />
+          <Route path="/:id" element={<InfoBook />} />
+        </Route>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<DashboardPrivate />} />
+          <Route path="/addbook" element={<AddBook />} />
+          <Route path="/edit/:id" element={<EditBook />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

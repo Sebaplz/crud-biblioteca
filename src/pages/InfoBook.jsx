@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import Loading from "../util/Loading";
-import Navbar from "../components/Navbar";
 import { IconArrowBackUp } from "@tabler/icons-react";
 import Error from "../util/Error";
 
@@ -34,7 +33,6 @@ export default function InfoBook() {
 
   return (
     <>
-      <Navbar />
       {isLoading && <Loading />}
       {!isLoading && (
         <>

@@ -23,9 +23,7 @@ const useUser = () => {
         return;
       }
       const data = await response.json();
-      login();
-      localStorage.setItem("userRol", data.role);
-      localStorage.setItem("username", data.username);
+      login(data);
       navigate("/dashboard");
     } catch (error) {
       setError(

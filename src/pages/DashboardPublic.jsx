@@ -2,9 +2,6 @@ import Loading from "../util/Loading";
 import Pagination from "../util/Pagination";
 import Error from "../util/Error";
 import useAllBooks from "../hooks/useAllBooks";
-import { useAuth } from "../auth/AuthProvider";
-import { Navigate } from "react-router-dom";
-import Navbar from "../components/Navbar";
 import { useState } from "react";
 import BookList from "../components/BookList";
 
@@ -14,19 +11,12 @@ export default function DashboardPublic() {
 
   const { allbooks, isLoading, error } = useAllBooks();
 
-  const { isAuthenticated } = useAuth();
-
-  if (isAuthenticated) {
-    return <Navigate to="/dashboard" />;
-  }
-
   const indexOfLastBook = currentPage * booksPerPage;
   const indexOfFirstBook = indexOfLastBook - booksPerPage;
   const currentBooks = allbooks.slice(indexOfFirstBook, indexOfLastBook);
 
   return (
     <>
-      <Navbar />
       <main className="mx-auto max-w-5xl pb-10 pt-40">
         {isLoading && <Loading />}
         {!isLoading && (

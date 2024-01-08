@@ -1,6 +1,5 @@
 import { useForm } from "react-hook-form";
-import { Link, Navigate } from "react-router-dom";
-import { useAuth } from "../auth/AuthProvider";
+import { Link } from "react-router-dom";
 import useUser from "../hooks/useUser";
 
 export default function Login() {
@@ -10,16 +9,10 @@ export default function Login() {
     formState: { errors },
   } = useForm();
 
-  const { isAuthenticated } = useAuth();
   const { handleAuthentication, error } = useUser();
   const onSubmit = (data) => {
     handleAuthentication(data, "login");
   };
-
-  if (isAuthenticated) {
-    console.log(isAuthenticated);
-    return <Navigate to="/dashboard" />;
-  }
 
   return (
     <main className="flex min-h-screen items-center justify-center">

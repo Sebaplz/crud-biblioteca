@@ -2,14 +2,12 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
 
 export default function Navbar() {
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, logout, userName } = useAuth();
 
   const handleCerrarSesion = () => {
     localStorage.clear();
     logout();
   };
-
-  const username = localStorage.getItem("username");
 
   return (
     <nav className="fixed z-50 w-full bg-white p-4 text-black lg:py-4">
@@ -24,9 +22,9 @@ export default function Navbar() {
           </Link>
         </div>
         <div className="flex items-center md:gap-4">
-          {username && (
+          {userName && (
             <p className="text-center">
-              Bienvenido! <span className="font-bold">{username}</span>
+              Bienvenido! <span className="font-bold">{userName}</span>
             </p>
           )}
           {isAuthenticated ? (
