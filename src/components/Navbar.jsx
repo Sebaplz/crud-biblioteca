@@ -15,11 +15,19 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           <img src="/Logo_rojo.webp" alt="Logo ACL" className="w-20" />
           <Link
-            to={"/dashboard"}
+            to={"/"}
             className="hidden font-bold text-black transition-colors hover:text-[#e02957] hover:underline md:block"
           >
             Biblioteca Virtual
           </Link>
+          {userRol == "ADMIN" && (
+            <Link
+              className="hidden font-bold text-black transition-colors hover:text-[#e02957] hover:underline md:block"
+              to={"/dashboard"}
+            >
+              Dashboard
+            </Link>
+          )}
         </div>
         <div className="flex items-center md:gap-4">
           {userName && (

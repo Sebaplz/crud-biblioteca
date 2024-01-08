@@ -31,7 +31,7 @@ export default function TableAllBooks({ currentBooks, deleteBook }) {
                 scope="row"
                 className="whitespace-nowrap px-6 py-4 font-medium text-gray-900 dark:text-white"
               >
-                <Link to={`/${book.id}`}>
+                <Link to={`/book/${book.id}`}>
                   <img
                     src={book.imagen}
                     alt={book.nombre}
