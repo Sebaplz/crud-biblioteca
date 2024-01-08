@@ -2,18 +2,15 @@ import Loading from "../util/Loading";
 import Pagination from "../util/Pagination";
 import Error from "../util/Error";
 import useAllBooks from "../hooks/useAllBooks";
-import { useState } from "react";
 import BookList from "../components/BookList";
 
 export default function DashboardPublic() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const booksPerPage = 6;
+  const { allbooks, isLoading, error, currentPage, totalPages, getAllBooks } =
+    useAllBooks();
 
-  const { allbooks, isLoading, error } = useAllBooks();
-
-  const indexOfLastBook = currentPage * booksPerPage;
-  const indexOfFirstBook = indexOfLastBook - booksPerPage;
-  const currentBooks = allbooks.slice(indexOfFirstBook, indexOfLastBook);
+  const handlePageChange = (newPage) => {
+    getAllBooks(newPage);
+  };
 
   return (
     <>
@@ -25,12 +22,11 @@ export default function DashboardPublic() {
               <Error error={error} />
             ) : (
               <>
-                <BookList currentBooks={currentBooks} />
+                <BookList currentBooks={allbooks} />
                 <Pagination
-                  totalBooks={allbooks.length}
                   currentPage={currentPage}
-                  setCurrentPage={setCurrentPage}
-                  booksPerPage={booksPerPage}
+                  totalPages={totalPages}
+                  handlePageChange={handlePageChange}
                 />
               </>
             )}

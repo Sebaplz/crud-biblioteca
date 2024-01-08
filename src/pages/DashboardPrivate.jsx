@@ -3,16 +3,13 @@ import TableAllBooks from "../components/TableAllBooks";
 import useAllBooks from "../hooks/useAllBooks";
 import Loading from "../util/Loading";
 import Pagination from "../util/Pagination";
-import { useState } from "react";
-
 export default function DashboardPrivate() {
-  const [currentPage, setCurrentPage] = useState(1);
-  const booksPerPage = 5;
-  const { isLoading, error, allbooks, getAllBooks } = useAllBooks();
+  const { allbooks, isLoading, error, currentPage, totalPages, getAllBooks } =
+    useAllBooks();
 
-  const indexOfLastBook = currentPage * booksPerPage;
-  const indexOfFirstBook = indexOfLastBook - booksPerPage;
-  const currentBooks = allbooks.slice(indexOfFirstBook, indexOfLastBook);
+  const handlePageChange = (newPage) => {
+    getAllBooks(newPage);
+  };
 
   const deleteBook = async (id) => {
     const url = `http://localhost:8080/api/books/delete/${id}`;
@@ -47,15 +44,11 @@ export default function DashboardPrivate() {
                 Agregar Libro
               </Link>
             </div>
-            <TableAllBooks
-              currentBooks={currentBooks}
-              deleteBook={deleteBook}
-            />
+            <TableAllBooks currentBooks={allbooks} deleteBook={deleteBook} />
             <Pagination
-              totalBooks={allbooks.length}
               currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-              booksPerPage={booksPerPage}
+              totalPages={totalPages}
+              handlePageChange={handlePageChange}
             />
           </main>
         </>

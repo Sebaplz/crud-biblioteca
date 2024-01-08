@@ -4,13 +4,18 @@ const useAllBooks = () => {
   const [allbooks, setAllBooks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(null);
+  const [totalPages, setTotalPages] = useState(null);
 
-  const getAllBooks = async () => {
-    const url = "http://localhost:8080/api/books";
+  const getAllBooks = async (page = 0) => {
+    const url = `http://localhost:8080/api/books?page=${page}`;
+
     try {
       const response = await fetch(url);
       const data = await response.json();
-      setAllBooks(data);
+      setAllBooks(data.content);
+      setTotalPages(data.totalPages);
+      setCurrentPage(data.pageable.pageNumber);
     } catch (error) {
       setError("No se pudo obtener la lista de libros!");
     } finally {
@@ -22,7 +27,7 @@ const useAllBooks = () => {
     getAllBooks();
   }, []);
 
-  return { allbooks, isLoading, error, getAllBooks };
+  return { allbooks, isLoading, error, currentPage, totalPages, getAllBooks };
 };
 
 export default useAllBooks;
