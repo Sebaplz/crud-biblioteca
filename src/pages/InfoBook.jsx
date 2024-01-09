@@ -29,6 +29,27 @@ export default function InfoBook() {
     }
   };
 
+  const downloadBook = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:8080/api/books/download/${id}`,
+      );
+
+      if (!response.ok) {
+        throw new Error("Error al intentar descargar el libro");
+      }
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${book.nombre}.txt`;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
     fetchBook();
   }, []);
@@ -59,17 +80,18 @@ export default function InfoBook() {
                   <p className="mt-8 max-w-lg">Sinopsis: {book.sinopsis}</p>
                   <div className="mt-10 flex items-center gap-4 lg:mt-16">
                     <p>Páginas: {book.paginas}</p>
-                    <button
+                    <a
                       className={`rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105 ${
                         userRol === "USER"
                           ? ""
                           : "disabled:scale-100 disabled:bg-opacity-50 disabled:transition-none"
                       }`}
                       disabled={userRol !== "USER"}
-                      onClick={() => print()}
+                      onClick={() => downloadBook()}
+                      download={`${book.nombre}.txt`}
                     >
                       Descargar
-                    </button>
+                    </a>
                   </div>
                 </div>
               </div>
