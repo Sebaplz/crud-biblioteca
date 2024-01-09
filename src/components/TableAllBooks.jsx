@@ -17,7 +17,7 @@ export default function TableAllBooks({ currentBooks, deleteBook }) {
               Autor
             </th>
             <th scope="col" className="px-6 py-3">
-              Precio
+              Páginas
             </th>
             <th scope="col" className="px-6 py-3">
               Acción
@@ -41,7 +41,7 @@ export default function TableAllBooks({ currentBooks, deleteBook }) {
               </th>
               <td className="px-6 py-4">{book.nombre}</td>
               <td className="px-6 py-4">{book.autor}</td>
-              <td className="px-6 py-4">${book.precio.toLocaleString()}</td>
+              <td className="px-6 py-4">{book.paginas}</td>
               <td className="flex h-[6.5rem] items-center gap-4">
                 <Link
                   to={`/edit/${book.id}`}

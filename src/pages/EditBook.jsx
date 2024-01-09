@@ -24,7 +24,7 @@ const EditBook = () => {
 
         setValue("nombre", data.nombre);
         setValue("autor", data.autor);
-        setValue("precio", data.precio);
+        setValue("paginas", data.paginas);
         setValue("sinopsis", data.sinopsis);
         setValue("imagen", data.imagen);
       } catch (error) {
@@ -105,25 +105,25 @@ const EditBook = () => {
         </div>
         <div className="mb-5">
           <label
-            htmlFor="precio"
+            htmlFor="paginas"
             className="mb-1 block font-semibold text-gray-700"
           >
-            Precio:
+            Páginas:
           </label>
           <input
-            {...register("precio", {
-              required: "Precio no puede estar vacío",
+            {...register("paginas", {
+              required: "Páginas no puede estar vacío",
               pattern: {
                 value: /^[0-9]+$/,
-                message: "Ingresa solo números en el campo de precio",
+                message: "Ingresa solo números en el campo de páginas",
               },
             })}
-            id="precio"
+            id="paginas"
             type="number"
             placeholder="$5000"
             className="w-full rounded-lg border p-2"
           />
-          <p className="mb-5 text-red-500">{errors.precio?.message}</p>
+          <p className="mb-5 text-red-500">{errors.paginas?.message}</p>
         </div>
         <div className="mb-5">
           <label

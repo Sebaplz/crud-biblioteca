@@ -58,7 +58,7 @@ export default function InfoBook() {
                   <h3 className="text-lg">{book.autor}</h3>
                   <p className="mt-8 max-w-lg">Sinopsis: {book.sinopsis}</p>
                   <div className="mt-10 flex items-center gap-4 lg:mt-16">
-                    <p>Precio: ${book.precio}</p>
+                    <p>Páginas: {book.paginas}</p>
                     <button
                       className={`rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105 ${
                         userRol === "USER"
