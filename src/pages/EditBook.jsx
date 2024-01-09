@@ -17,7 +17,9 @@ const EditBook = () => {
   useEffect(() => {
     const fetchBook = async () => {
       try {
-        const response = await fetch(`http://localhost:8080/api/books/${id}`);
+        const response = await fetch(
+          `http://localhost:8080/api/books/book/${id}`,
+        );
         const data = await response.json();
 
         setValue("nombre", data.nombre);
