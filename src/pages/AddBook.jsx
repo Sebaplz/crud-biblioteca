@@ -31,6 +31,9 @@ const AddBook = () => {
       if (response.ok) {
         setInfo("Libro agregado correctamente");
         reset();
+        setTimeout(() => {
+          setInfo(null);
+        }, 1000);
       } else {
         setInfo("Error al agregar el libro");
       }

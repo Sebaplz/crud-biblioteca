@@ -1,10 +1,7 @@
 /* eslint-disable react/prop-types */
 const Pagination = ({ currentPage, totalPages, handlePageChange }) => {
   return (
-    <nav
-      aria-label="Page navigation"
-      className="flex justify-center pt-4 lg:pt-10"
-    >
+    <nav aria-label="Page navigation" className="flex justify-center pt-4">
       <ul className="inline-flex -space-x-px text-sm">
         <li>
           <button

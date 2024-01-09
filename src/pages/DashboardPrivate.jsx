@@ -3,7 +3,9 @@ import TableAllBooks from "../components/TableAllBooks";
 import useAllBooks from "../hooks/useAllBooks";
 import Loading from "../util/Loading";
 import Pagination from "../util/Pagination";
+import { useState } from "react";
 export default function DashboardPrivate() {
+  const [message, setMessage] = useState(null);
   const { allbooks, isLoading, error, currentPage, totalPages, getAllBooks } =
     useAllBooks();
 
@@ -20,11 +22,11 @@ export default function DashboardPrivate() {
     try {
       const response = await fetch(url, options);
       const data = await response.json();
-      console.log(data.message);
+      setMessage(data.message);
     } catch (error) {
       console.error(error);
     } finally {
-      getAllBooks();
+      getAllBooks(currentPage);
     }
   };
 
@@ -45,6 +47,7 @@ export default function DashboardPrivate() {
               </Link>
             </div>
             <TableAllBooks currentBooks={allbooks} deleteBook={deleteBook} />
+            {message && <p className="pt-2 text-center">{message}</p>}
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
