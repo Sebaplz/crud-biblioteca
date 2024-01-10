@@ -80,18 +80,21 @@ export default function InfoBook() {
                   <p className="mt-8 max-w-lg">Sinopsis: {book.sinopsis}</p>
                   <div className="mt-10 flex items-center gap-4 lg:mt-16">
                     <p>Páginas: {book.paginas}</p>
-                    <a
-                      className={`rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105 ${
-                        userRol === "USER"
-                          ? ""
-                          : "disabled:scale-100 disabled:bg-opacity-50 disabled:transition-none"
-                      }`}
-                      disabled={userRol !== "USER"}
-                      onClick={() => downloadBook()}
-                      download={`${book.nombre}.txt`}
-                    >
-                      Descargar
-                    </a>
+                    {userRol === "USER" ? (
+                      <a
+                        className="cursor-pointer rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105"
+                        onClick={() => downloadBook()}
+                      >
+                        Descargar
+                      </a>
+                    ) : (
+                      <button
+                        className="rounded-md bg-[#e02957] p-2 font-semibold text-white disabled:bg-opacity-50"
+                        disabled
+                      >
+                        Descargar
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>

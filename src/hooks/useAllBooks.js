@@ -7,8 +7,8 @@ const useAllBooks = () => {
   const [currentPage, setCurrentPage] = useState(null);
   const [totalPages, setTotalPages] = useState(null);
 
-  const getAllBooks = async (page = 0) => {
-    const url = `http://localhost:8080/api/books?page=${page}`;
+  const getAllBooks = async (page = 0, size = 5, sort = "nombre,desc") => {
+    const url = `http://localhost:8080/api/books?page=${page}&size=${size}&sort=${sort}`;
 
     try {
       const response = await fetch(url);
