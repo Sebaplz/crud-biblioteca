@@ -4,17 +4,19 @@ import useAllBooks from "../hooks/useAllBooks";
 import Loading from "../util/Loading";
 import Pagination from "../util/Pagination";
 import { useState } from "react";
+import { useAuth } from "../auth/AuthProvider";
 export default function DashboardPrivate() {
   const [message, setMessage] = useState(null);
   const { allbooks, isLoading, error, currentPage, totalPages, getAllBooks } =
     useAllBooks();
+  const { email } = useAuth();
 
   const handlePageChange = (newPage) => {
     getAllBooks(newPage);
   };
 
   const deleteBook = async (id) => {
-    const url = `http://localhost:8080/api/books/delete/${id}`;
+    const url = `http://localhost:8080/api/books/delete/${id}?email=${email}`;
     const options = {
       method: "DELETE",
     };

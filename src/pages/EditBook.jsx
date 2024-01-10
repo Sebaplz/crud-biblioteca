@@ -2,6 +2,7 @@ import { IconArrowBackUp } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate, useParams } from "react-router-dom";
+import { useAuth } from "../auth/AuthProvider";
 
 const EditBook = () => {
   const { id } = useParams();
@@ -13,6 +14,7 @@ const EditBook = () => {
     formState: { errors },
   } = useForm();
   const navigate = useNavigate();
+  const { email } = useAuth();
 
   useEffect(() => {
     const fetchBook = async () => {
@@ -44,7 +46,7 @@ const EditBook = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/books/edit/${id}`,
+        `http://localhost:8080/api/books/edit/${id}?email=${email}`,
         options,
       );
 
