@@ -14,9 +14,7 @@ export default function InfoBook() {
 
   const fetchBook = async () => {
     try {
-      const response = await fetch(
-        `http://localhost:8080/api/books/book/${id}`,
-      );
+      const response = await fetch(`${import.meta.env.VITE_URL_GETBOOK}/${id}`);
       if (!response.ok) {
         setError(response.text);
       }

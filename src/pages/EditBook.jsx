@@ -46,7 +46,7 @@ const EditBook = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/books/edit/${id}?email=${email}`,
+        `${import.meta.env.VITE_URL_EDITBOOK}/${id}?email=${email}`,
         options,
       );
 

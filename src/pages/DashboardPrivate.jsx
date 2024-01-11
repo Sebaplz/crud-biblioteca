@@ -16,7 +16,7 @@ export default function DashboardPrivate() {
   };
 
   const deleteBook = async (id) => {
-    const url = `http://localhost:8080/api/books/delete/${id}?email=${email}`;
+    const url = `${import.meta.env.VITE_URL_DELETEBOOK}/${id}?email=${email}`;
     const options = {
       method: "DELETE",
     };

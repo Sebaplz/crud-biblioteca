@@ -8,7 +8,9 @@ const useAllBooks = () => {
   const [totalPages, setTotalPages] = useState(null);
 
   const getAllBooks = async (page = 0, size = 5) => {
-    const url = `http://localhost:8080/api/books?page=${page}&size=${size}`;
+    const url = `${
+      import.meta.env.VITE_URL_ALLBOOKS
+    }?page=${page}&size=${size}`;
 
     try {
       const response = await fetch(url);

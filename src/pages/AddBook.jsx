@@ -24,7 +24,7 @@ const AddBook = () => {
 
     try {
       const response = await fetch(
-        `http://localhost:8080/api/books/new?email=${email}`,
+        `${import.meta.env.VITE_URL_ADDBOOK}?email=${email}`,
         options,
       );
 

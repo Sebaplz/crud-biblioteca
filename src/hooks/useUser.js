@@ -8,7 +8,7 @@ const useUser = () => {
   const { login } = useAuth();
 
   const handleAuthentication = async (data, url) => {
-    const urlBase = `http://localhost:8080/api/user/${url}`;
+    const urlBase = `${import.meta.env.VITE_URL_AUTHENTICACTION}/${url}`;
     const options = {
       method: "POST",
       headers: { "content-type": "application/json" },
