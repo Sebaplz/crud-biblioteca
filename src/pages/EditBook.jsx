@@ -24,11 +24,11 @@ const EditBook = () => {
         );
         const data = await response.json();
 
-        setValue("nombre", data.nombre);
-        setValue("autor", data.autor);
-        setValue("paginas", data.paginas);
-        setValue("sinopsis", data.sinopsis);
-        setValue("imagen", data.imagen);
+        setValue("title", data.title);
+        setValue("author", data.author);
+        setValue("pages", data.pages);
+        setValue("synopsis", data.synopsis);
+        setValue("image", data.image);
       } catch (error) {
         console.error("Error al obtener la información del libro:", error);
       }
@@ -73,94 +73,94 @@ const EditBook = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="mx-auto max-w-md">
         <div className="mb-5">
           <label
-            htmlFor="nombre"
+            htmlFor="title"
             className="mb-1 block font-semibold text-gray-700"
           >
             Nombre del Libro:
           </label>
           <input
-            {...register("nombre", {
+            {...register("title", {
               required: "Nombre no puede estar vacío",
             })}
-            id="nombre"
+            id="title"
             placeholder="Harry Potter"
             className="w-full rounded-lg border p-2"
           />
-          <p className="mb-5 text-red-500">{errors.nombre?.message}</p>
+          <p className="mb-5 text-red-500">{errors.title?.message}</p>
         </div>
         <div className="mb-5">
           <label
-            htmlFor="autor"
+            htmlFor="author"
             className="mb-1 block font-semibold text-gray-700"
           >
             Autor:
           </label>
           <input
-            {...register("autor", {
+            {...register("author", {
               required: "Autor no puede estar vacío",
             })}
-            id="autor"
+            id="author"
             placeholder="J. K. Rowling"
             className="w-full rounded-lg border p-2"
           />
-          <p className="mb-5 text-red-500">{errors.autor?.message}</p>
+          <p className="mb-5 text-red-500">{errors.author?.message}</p>
         </div>
         <div className="mb-5">
           <label
-            htmlFor="paginas"
+            htmlFor="pages"
             className="mb-1 block font-semibold text-gray-700"
           >
             Páginas:
           </label>
           <input
-            {...register("paginas", {
+            {...register("pages", {
               required: "Páginas no puede estar vacío",
               pattern: {
                 value: /^[0-9]+$/,
                 message: "Ingresa solo números en el campo de páginas",
               },
             })}
-            id="paginas"
+            id="pages"
             type="number"
             placeholder="$5000"
             className="w-full rounded-lg border p-2"
           />
-          <p className="mb-5 text-red-500">{errors.paginas?.message}</p>
+          <p className="mb-5 text-red-500">{errors.pages?.message}</p>
         </div>
         <div className="mb-5">
           <label
-            htmlFor="sinopsis"
+            htmlFor="synopsis"
             className="mb-1 block font-semibold text-gray-700"
           >
             Sinopsis:
           </label>
           <textarea
-            {...register("sinopsis", {
+            {...register("synopsis", {
               required: "Sinopsis no puede estar vacía",
             })}
-            id="sinopsis"
+            id="synopsis"
             placeholder="lorem ipsum..."
             className="w-full rounded-lg border p-2"
             maxLength={200}
           />
-          <p className="text-red-500">{errors.sinopsis?.message}</p>
+          <p className="text-red-500">{errors.synopsis?.message}</p>
         </div>
         <div className="mb-5">
           <label
-            htmlFor="imagen"
+            htmlFor="image"
             className="mb-1 block font-semibold text-gray-700"
           >
             URL de la Imagen:
           </label>
           <input
-            {...register("imagen", {
+            {...register("image", {
               required: "Imagen no puede estar vacía",
             })}
-            id="imagen"
+            id="image"
             placeholder="url/imagen"
             className="w-full rounded-lg border p-2"
           />
-          <p className="mb-5 text-red-500">{errors.imagen?.message}</p>
+          <p className="mb-5 text-red-500">{errors.image?.message}</p>
         </div>
         <button
           type="submit"

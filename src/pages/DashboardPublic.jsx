@@ -9,7 +9,7 @@ export default function DashboardPublic() {
     useAllBooks();
 
   const handlePageChange = (newPage) => {
-    getAllBooks(newPage, 6, `nombre,desc`);
+    getAllBooks(newPage);
   };
 
   return (

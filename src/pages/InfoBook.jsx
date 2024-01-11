@@ -29,27 +29,6 @@ export default function InfoBook() {
     }
   };
 
-  const downloadBook = async () => {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/api/books/download/${id}`,
-      );
-
-      if (!response.ok) {
-        throw new Error("Error al intentar descargar el libro");
-      }
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `${book.nombre}.txt`;
-      a.click();
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
   useEffect(() => {
     fetchBook();
   }, []);
@@ -70,20 +49,20 @@ export default function InfoBook() {
               </div>
               <div className="flex flex-col items-center gap-4 lg:flex-row lg:justify-center">
                 <img
-                  src={book.imagen}
-                  alt={book.nombre}
+                  src={book.image}
+                  alt={book.title}
                   className="h-64 w-52 lg:h-80 lg:w-64"
                 />
                 <div className="p-4">
-                  <h2 className="max-w-md text-4xl">{book.nombre}</h2>
-                  <h3 className="text-lg">{book.autor}</h3>
-                  <p className="mt-8 max-w-lg">Sinopsis: {book.sinopsis}</p>
+                  <h2 className="max-w-md text-4xl">{book.title}</h2>
+                  <h3 className="text-lg">{book.author}</h3>
+                  <p className="mt-8 max-w-lg">Sinopsis: {book.synopsis}</p>
                   <div className="mt-10 flex items-center gap-4 lg:mt-16">
-                    <p>Páginas: {book.paginas}</p>
+                    <p>Páginas: {book.pages}</p>
                     {userRol === "USER" ? (
                       <a
                         className="cursor-pointer rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105"
-                        onClick={() => downloadBook()}
+                        onClick={() => print()}
                       >
                         Descargar
                       </a>

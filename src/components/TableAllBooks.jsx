@@ -33,15 +33,15 @@ export default function TableAllBooks({ currentBooks, deleteBook }) {
               >
                 <Link to={`/book/${book.id}`}>
                   <img
-                    src={book.imagen}
-                    alt={book.nombre}
+                    src={book.image}
+                    alt={book.title}
                     className="h-20 w-20 rounded-lg"
                   />
                 </Link>
               </th>
-              <td className="px-6 py-4">{book.nombre}</td>
-              <td className="px-6 py-4">{book.autor}</td>
-              <td className="px-6 py-4">{book.paginas}</td>
+              <td className="px-6 py-4">{book.title}</td>
+              <td className="px-6 py-4">{book.author}</td>
+              <td className="px-6 py-4">{book.pages}</td>
               <td className="flex h-[6.5rem] items-center gap-4">
                 <Link
                   to={`/edit/${book.id}`}
@@ -50,7 +50,16 @@ export default function TableAllBooks({ currentBooks, deleteBook }) {
                   Editar
                 </Link>
                 <button
-                  onClick={() => deleteBook(book.id)}
+                  onClick={() => {
+                    if (
+                      window.confirm(
+                        "¿Realmente deseas eliminar este libro? " +
+                          `${book.title}`,
+                      )
+                    ) {
+                      deleteBook(book.id);
+                    }
+                  }}
                   className="pr-4 font-medium text-[#e02957] hover:underline"
                 >
                   Eliminar

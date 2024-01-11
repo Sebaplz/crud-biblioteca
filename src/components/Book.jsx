@@ -7,13 +7,13 @@ export default function Book({ book }) {
       <li className="flex h-[300px] flex-col items-center justify-center rounded-lg">
         <Link to={`/book/${book.id}`}>
           <img
-            src={book.imagen}
-            alt={`Imagen del libro ${book.nombre}`}
+            src={book.image}
+            alt={`Imagen del libro ${book.title}`}
             className="h-60 w-52 rounded-lg object-center"
           />
         </Link>
-        <h2 className="w-52 truncate text-left font-semibold">{book.nombre}</h2>
-        <h3 className="w-52 truncate text-left">{book.autor}</h3>
+        <h2 className="w-52 truncate text-left font-semibold">{book.title}</h2>
+        <h3 className="w-52 truncate text-left">{book.author}</h3>
       </li>
     </>
   );

@@ -25,6 +25,9 @@ export default function DashboardPrivate() {
       const response = await fetch(url, options);
       const data = await response.json();
       setMessage(data.message);
+      setTimeout(() => {
+        setMessage(null);
+      }, 1500);
     } catch (error) {
       console.error(error);
     } finally {
