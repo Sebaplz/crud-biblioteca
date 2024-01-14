@@ -25,7 +25,7 @@ export default function Navbar() {
               className="hidden font-bold text-black transition-colors hover:text-[#e02957] hover:underline md:block"
               to={"/dashboard"}
             >
-              Dashboard
+              Panel de Control
             </Link>
           )}
         </div>

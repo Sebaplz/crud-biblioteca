@@ -9,6 +9,7 @@ import EditBook from "./pages/EditBook";
 import Register from "./pages/Register";
 import Layout from "./pages/Layout";
 import { ProtectedAuth } from "./auth/rules/ProtectedAuth";
+import AllUsers from "./pages/AllUsers";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/dashboard" element={<DashboardPrivate />} />
           <Route path="/addbook" element={<AddBook />} />
           <Route path="/edit/:id" element={<EditBook />} />
+          <Route path="/users" element={<AllUsers />} />
         </Route>
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

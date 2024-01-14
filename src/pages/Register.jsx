@@ -25,20 +25,32 @@ export default function Register() {
           Biblioteca Virtual
         </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <label
+            htmlFor="username"
+            className="mb-1 block font-semibold text-gray-700"
+          >
+            Nombre de Usuario
+          </label>
           <input
             {...register("username", {
-              required: "Username no puede estar vacio!",
+              required: "El nombre de usuario no puede estar vacio!",
             })}
-            placeholder="username"
+            placeholder="Nombre de Usuario"
             className="w-full rounded-lg border p-2"
           />
           <p className="mb-5 text-red-500">{errors.username?.message}</p>
+          <label
+            htmlFor="email"
+            className="mb-1 block font-semibold text-gray-700"
+          >
+            Correo Electrónico
+          </label>
           <input
             {...register("email", {
-              required: "Email no puede estar vacio!",
+              required: "El correo electrónico no puede estar vacio!",
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: "Debe ser un email valido!",
+                message: "Debe ser un correo electrónico valido!",
               },
             })}
             autoComplete="email"
@@ -46,9 +58,15 @@ export default function Register() {
             className="w-full rounded-lg border p-2"
           />
           <p className="mb-5 text-red-500">{errors.email?.message}</p>
+          <label
+            htmlFor="password"
+            className="mb-1 block font-semibold text-gray-700"
+          >
+            Contraseña
+          </label>
           <input
             {...register("password", {
-              required: "Password no puede estar vacio!",
+              required: "La contraseña no puede estar vacia!",
             })}
             type="Password"
             placeholder="********"
@@ -68,7 +86,7 @@ export default function Register() {
             to={"/"}
             className="text-center font-bold text-black transition-colors hover:text-[#e02957] hover:underline"
           >
-            Volver al dashboard
+            Volver al inicio
           </Link>
           <Link
             to={"/login"}

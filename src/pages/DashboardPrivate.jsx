@@ -45,6 +45,12 @@ export default function DashboardPrivate() {
           <main className="mx-auto max-w-5xl pt-32">
             <div className="flex justify-end">
               <Link
+                to={"/users"}
+                className="mb-5 rounded-md px-4 font-semibold text-[#e02957] transition-transform hover:scale-105 lg:py-2"
+              >
+                Ver Usuarios
+              </Link>
+              <Link
                 to={"/addbook"}
                 className="mb-5 rounded-md px-4 font-semibold text-[#e02957] transition-transform hover:scale-105 lg:py-2"
               >
