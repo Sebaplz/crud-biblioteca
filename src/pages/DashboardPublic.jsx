@@ -1,16 +1,21 @@
 import Loading from "../util/Loading";
 import Pagination from "../util/Pagination";
 import Error from "../util/Error";
-import useAllBooks from "../hooks/useAllBooks";
 import BookList from "../components/BookList";
+import useApiData from "../hooks/useApiData";
+import { useEffect } from "react";
 
 export default function DashboardPublic() {
-  const { allbooks, isLoading, error, currentPage, totalPages, getAllBooks } =
-    useAllBooks();
+  const { data, isLoading, error, currentPage, totalPages, fetchData } =
+    useApiData();
 
   const handlePageChange = (newPage) => {
-    getAllBooks(newPage);
+    fetchData(import.meta.env.VITE_URL_ALLBOOKS, newPage);
   };
+
+  useEffect(() => {
+    fetchData(import.meta.env.VITE_URL_ALLBOOKS);
+  }, []);
 
   return (
     <>
@@ -22,7 +27,7 @@ export default function DashboardPublic() {
               <Error error={error} />
             ) : (
               <>
-                <BookList currentBooks={allbooks} />
+                <BookList currentBooks={data} />
                 <Pagination
                   currentPage={currentPage}
                   totalPages={totalPages}

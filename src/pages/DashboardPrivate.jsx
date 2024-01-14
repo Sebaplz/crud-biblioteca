@@ -1,18 +1,19 @@
 import { Link } from "react-router-dom";
 import TableAllBooks from "../components/TableAllBooks";
-import useAllBooks from "../hooks/useAllBooks";
 import Loading from "../util/Loading";
 import Pagination from "../util/Pagination";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
+import useApiData from "../hooks/useApiData";
+
 export default function DashboardPrivate() {
   const [message, setMessage] = useState(null);
-  const { allbooks, isLoading, error, currentPage, totalPages, getAllBooks } =
-    useAllBooks();
+  const { data, isLoading, error, currentPage, totalPages, fetchData } =
+    useApiData();
   const { email } = useAuth();
 
   const handlePageChange = (newPage) => {
-    getAllBooks(newPage);
+    fetchData(import.meta.env.VITE_URL_ALLBOOKS, newPage);
   };
 
   const deleteBook = async (id) => {
@@ -31,9 +32,13 @@ export default function DashboardPrivate() {
     } catch (error) {
       console.error(error);
     } finally {
-      getAllBooks(currentPage);
+      fetchData(import.meta.env.VITE_URL_ALLBOOKS, currentPage);
     }
   };
+
+  useEffect(() => {
+    fetchData(import.meta.env.VITE_URL_ALLBOOKS);
+  }, []);
 
   return (
     <>
@@ -43,7 +48,7 @@ export default function DashboardPrivate() {
       ) : (
         <>
           <main className="mx-auto max-w-5xl pt-32">
-            <div className="flex justify-end">
+            <div className="flex justify-between">
               <Link
                 to={"/users"}
                 className="mb-5 rounded-md px-4 font-semibold text-[#e02957] transition-transform hover:scale-105 lg:py-2"
@@ -57,7 +62,7 @@ export default function DashboardPrivate() {
                 Agregar Libro
               </Link>
             </div>
-            <TableAllBooks currentBooks={allbooks} deleteBook={deleteBook} />
+            <TableAllBooks currentBooks={data} deleteBook={deleteBook} />
             {message && <p className="pt-2 text-center">{message}</p>}
             <Pagination
               currentPage={currentPage}

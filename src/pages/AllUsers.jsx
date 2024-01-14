@@ -1,45 +1,23 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import Loading from "../util/Loading";
 import TableAllUsers from "../components/TableAllUsers";
 import Pagination from "../util/Pagination";
-import { useAuth } from "../auth/AuthProvider";
+import useApiData from "../hooks/useApiData";
+import { Link } from "react-router-dom";
+import { IconArrowBackUp } from "@tabler/icons-react";
 
 export default function AllUsers() {
-  const [users, setUsers] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [currentPage, setCurrentPage] = useState(null);
-  const [totalPages, setTotalPages] = useState(null);
-  const { email } = useAuth();
+  const { data, isLoading, error, currentPage, totalPages, fetchData } =
+    useApiData();
 
   const handlePageChange = (newPage) => {
-    getAllUsers(newPage);
-  };
-
-  const getAllUsers = async (page = 0, size = 5) => {
-    try {
-      const response = await fetch(
-        `http://localhost:8080/api/user/users?page=${page}&size=${size}?email=${email}`,
-      );
-      if (!response.ok) {
-        const errorData = await response.json();
-        setError(errorData.message);
-        return;
-      }
-      const data = await response.json();
-      setUsers(data.content);
-      setCurrentPage(data.pageable.pageNumber);
-      setTotalPages(data.totalPages);
-    } catch (error) {
-      setError(error);
-    } finally {
-      setIsLoading(false);
-    }
+    fetchData(import.meta.env.VITE_URL_ALLUSERS, newPage);
   };
 
   useEffect(() => {
-    getAllUsers();
+    fetchData(import.meta.env.VITE_URL_ALLUSERS);
   }, []);
+
   return (
     <>
       {error && <p className="text-red-500">{error}</p>}
@@ -47,7 +25,12 @@ export default function AllUsers() {
         <Loading />
       ) : (
         <main className="mx-auto max-w-5xl pt-32">
-          <TableAllUsers users={users} />
+          <div className="m-4 flex lg:m-0 lg:pb-4">
+            <Link to={"/dashboard"}>
+              <IconArrowBackUp color="#e02957" size={30} />
+            </Link>
+          </div>
+          <TableAllUsers users={data} />
           <Pagination
             currentPage={currentPage}
             totalPages={totalPages}
