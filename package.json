@@ -12,6 +12,7 @@
   "dependencies": {
     "@tabler/icons-react": "^2.45.0",
     "@tremor/react": "^3.13.1",
+    "flowbite-react": "^0.7.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.2",

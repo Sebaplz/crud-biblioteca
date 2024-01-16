@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import TableAllBooks from "../../components/TableAllBooks";
 import Loading from "../../util/Loading";
 import Pagination from "../../util/Pagination";
+import Toast from "../../util/Toast";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../auth/AuthProvider";
 import useApiData from "../../hooks/useApiData";
@@ -33,7 +34,7 @@ export default function DashboardPrivate() {
       setMessage(data.message);
       setTimeout(() => {
         setMessage(null);
-      }, 1500);
+      }, 2000);
     } catch (error) {
       console.error(error);
     } finally {
@@ -52,6 +53,7 @@ export default function DashboardPrivate() {
         <Loading />
       ) : (
         <>
+          {message && <Toast />}
           <main className="mx-auto max-w-5xl pt-32">
             <div className="flex justify-between">
               <div className="flex flex-wrap justify-center">
@@ -79,7 +81,6 @@ export default function DashboardPrivate() {
               </Link>
             </div>
             <TableAllBooks currentBooks={data} deleteBook={deleteBook} />
-            {message && <p className="pt-2 text-center">{message}</p>}
             <Pagination
               currentPage={currentPage}
               totalPages={totalPages}
