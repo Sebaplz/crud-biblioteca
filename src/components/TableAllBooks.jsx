@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { IconEdit, IconTrash } from "@tabler/icons-react";
 import { Link } from "react-router-dom";
 
 export default function TableAllBooks({ currentBooks, deleteBook }) {
@@ -45,8 +46,9 @@ export default function TableAllBooks({ currentBooks, deleteBook }) {
               <td className="flex h-[6.5rem] items-center gap-4">
                 <Link
                   to={`/edit/${book.id}`}
-                  className="font-medium text-blue-600 hover:underline"
+                  className="flex gap-1 font-medium text-blue-600 hover:underline"
                 >
+                  <IconEdit color="#2563EB" size={20} />
                   Editar
                 </Link>
                 <button
@@ -60,9 +62,10 @@ export default function TableAllBooks({ currentBooks, deleteBook }) {
                       deleteBook(book.id);
                     }
                   }}
-                  className="pr-4 font-medium text-[#e02957] hover:underline"
+                  className="flex gap-1 pr-4 font-medium text-[#e02957] hover:underline"
                 >
                   Eliminar
+                  <IconTrash color="#e02957" size={20} />
                 </button>
               </td>
             </tr>

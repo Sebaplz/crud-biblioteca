@@ -1,8 +1,8 @@
-import { IconArrowBackUp } from "@tabler/icons-react";
+import { IconArrowBackUp, IconCirclePlus } from "@tabler/icons-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import { useAuth } from "../auth/AuthProvider";
+import { useAuth } from "../../auth/AuthProvider";
 
 const AddBook = () => {
   const [info, setInfo] = useState(null);
@@ -143,8 +143,9 @@ const AddBook = () => {
         </div>
         <button
           type="submit"
-          className="rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105"
+          className="flex items-center gap-1 rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105"
         >
+          <IconCirclePlus color="white" size={20} />
           Agregar Libro
         </button>
       </form>

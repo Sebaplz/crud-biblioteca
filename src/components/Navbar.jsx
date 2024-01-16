@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
+import { IconHome } from "@tabler/icons-react";
 
 export default function Navbar() {
   const { isAuthenticated, logout, userName, userRol } = useAuth();
@@ -22,10 +23,11 @@ export default function Navbar() {
           </Link>
           {userRol == "ADMIN" && (
             <Link
-              className="hidden font-bold text-black transition-colors hover:text-[#e02957] hover:underline md:block"
+              className="hidden items-center gap-1 font-bold text-black transition-colors hover:text-[#e02957] hover:underline md:flex"
               to={"/dashboard"}
             >
               Panel de Control
+              <IconHome color="black" size={20} />
             </Link>
           )}
         </div>

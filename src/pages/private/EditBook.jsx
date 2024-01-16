@@ -1,8 +1,8 @@
-import { IconArrowBackUp } from "@tabler/icons-react";
+import { IconArrowBackUp, IconEdit } from "@tabler/icons-react";
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useAuth } from "../auth/AuthProvider";
+import { useAuth } from "../../auth/AuthProvider";
 
 const EditBook = () => {
   const { id } = useParams();
@@ -164,8 +164,9 @@ const EditBook = () => {
         </div>
         <button
           type="submit"
-          className="rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105"
+          className="flex items-center gap-1 rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105"
         >
+          <IconEdit color="white" size={20} />
           Actualizar Libro
         </button>
       </form>

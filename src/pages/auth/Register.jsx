@@ -1,8 +1,8 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import useUser from "../hooks/useUser";
+import useUser from "../../hooks/useUser";
 
-export default function Login() {
+export default function Register() {
   const {
     register,
     handleSubmit,
@@ -10,8 +10,9 @@ export default function Login() {
   } = useForm();
 
   const { handleAuthentication, error } = useUser();
+
   const onSubmit = (data) => {
-    handleAuthentication(data, "login");
+    handleAuthentication(data, "register");
   };
 
   return (
@@ -24,6 +25,20 @@ export default function Login() {
           Biblioteca Virtual
         </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
+          <label
+            htmlFor="username"
+            className="mb-1 block font-semibold text-gray-700"
+          >
+            Nombre de Usuario
+          </label>
+          <input
+            {...register("username", {
+              required: "El nombre de usuario no puede estar vacio!",
+            })}
+            placeholder="Nombre de Usuario"
+            className="w-full rounded-lg border p-2"
+          />
+          <p className="mb-5 text-red-500">{errors.username?.message}</p>
           <label
             htmlFor="email"
             className="mb-1 block font-semibold text-gray-700"
@@ -62,7 +77,7 @@ export default function Login() {
             className="h-12 w-full rounded-lg bg-[#e02957] font-bold text-white"
             type="submit"
           >
-            Iniciar Sesión
+            Crear Cuenta
           </button>
           <p className="mb-5 text-red-500">{error && <span>{error}</span>}</p>
         </form>
@@ -74,10 +89,10 @@ export default function Login() {
             Volver al inicio
           </Link>
           <Link
-            to={"/register"}
+            to={"/login"}
             className="text-center font-bold text-black transition-colors hover:text-[#e02957] hover:underline"
           >
-            Crea una cuenta!
+            Ya tengo una cuenta!
           </Link>
         </div>
       </section>

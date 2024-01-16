@@ -1,8 +1,8 @@
-import Loading from "../util/Loading";
-import Pagination from "../util/Pagination";
-import Error from "../util/Error";
-import BookList from "../components/BookList";
-import useApiData from "../hooks/useApiData";
+import Loading from "../../util/Loading";
+import Pagination from "../../util/Pagination";
+import Error from "../../util/Error";
+import BookList from "../../components/BookList";
+import useApiData from "../../hooks/useApiData";
 import { useEffect } from "react";
 
 export default function DashboardPublic() {

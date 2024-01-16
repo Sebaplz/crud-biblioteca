@@ -1,10 +1,15 @@
 import { Link } from "react-router-dom";
-import TableAllBooks from "../components/TableAllBooks";
-import Loading from "../util/Loading";
-import Pagination from "../util/Pagination";
+import TableAllBooks from "../../components/TableAllBooks";
+import Loading from "../../util/Loading";
+import Pagination from "../../util/Pagination";
 import { useEffect, useState } from "react";
-import { useAuth } from "../auth/AuthProvider";
-import useApiData from "../hooks/useApiData";
+import { useAuth } from "../../auth/AuthProvider";
+import useApiData from "../../hooks/useApiData";
+import {
+  IconChartPie,
+  IconCirclePlus,
+  IconUsersGroup,
+} from "@tabler/icons-react";
 
 export default function DashboardPrivate() {
   const [message, setMessage] = useState(null);
@@ -49,16 +54,27 @@ export default function DashboardPrivate() {
         <>
           <main className="mx-auto max-w-5xl pt-32">
             <div className="flex justify-between">
-              <Link
-                to={"/users"}
-                className="mb-5 rounded-md px-4 font-semibold text-[#e02957] transition-transform hover:scale-105 lg:py-2"
-              >
-                Ver Usuarios
-              </Link>
+              <div className="flex flex-wrap justify-center">
+                <Link
+                  to={"/users"}
+                  className="mb-5 flex items-center gap-1 rounded-md px-4 font-semibold text-[#e02957] transition-transform hover:scale-105 lg:py-2"
+                >
+                  <IconUsersGroup color="#e02957" size={20} />
+                  Ver todos los usuarios
+                </Link>
+                <Link
+                  to={"/statistics"}
+                  className="mb-5 flex items-center gap-1 rounded-md px-4 font-semibold text-[#e02957] transition-transform hover:scale-105 lg:py-2"
+                >
+                  Ver estadisticas
+                  <IconChartPie color="#e02957" size={20} />
+                </Link>
+              </div>
               <Link
                 to={"/addbook"}
-                className="mb-5 rounded-md px-4 font-semibold text-[#e02957] transition-transform hover:scale-105 lg:py-2"
+                className="mb-5 flex items-center gap-1 rounded-md px-4 font-semibold text-[#e02957] transition-transform hover:scale-105 lg:py-2"
               >
+                <IconCirclePlus color="#e02957" size={20} />
                 Agregar Libro
               </Link>
             </div>

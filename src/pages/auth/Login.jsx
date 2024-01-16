@@ -1,8 +1,9 @@
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
-import useUser from "../hooks/useUser";
+import useUser from "../../hooks/useUser";
+import { IconLogin } from "@tabler/icons-react";
 
-export default function Register() {
+export default function Login() {
   const {
     register,
     handleSubmit,
@@ -10,9 +11,8 @@ export default function Register() {
   } = useForm();
 
   const { handleAuthentication, error } = useUser();
-
   const onSubmit = (data) => {
-    handleAuthentication(data, "register");
+    handleAuthentication(data, "login");
   };
 
   return (
@@ -25,20 +25,6 @@ export default function Register() {
           Biblioteca Virtual
         </h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label
-            htmlFor="username"
-            className="mb-1 block font-semibold text-gray-700"
-          >
-            Nombre de Usuario
-          </label>
-          <input
-            {...register("username", {
-              required: "El nombre de usuario no puede estar vacio!",
-            })}
-            placeholder="Nombre de Usuario"
-            className="w-full rounded-lg border p-2"
-          />
-          <p className="mb-5 text-red-500">{errors.username?.message}</p>
           <label
             htmlFor="email"
             className="mb-1 block font-semibold text-gray-700"
@@ -74,10 +60,11 @@ export default function Register() {
           />
           <p className="mb-5 text-red-500">{errors.password?.message}</p>
           <button
-            className="h-12 w-full rounded-lg bg-[#e02957] font-bold text-white"
+            className="flex h-12 w-full items-center justify-center gap-1 rounded-lg bg-[#e02957] font-bold text-white"
             type="submit"
           >
-            Crear Cuenta
+            <IconLogin color="white" size={20} />
+            Iniciar Sesión
           </button>
           <p className="mb-5 text-red-500">{error && <span>{error}</span>}</p>
         </form>
@@ -89,10 +76,10 @@ export default function Register() {
             Volver al inicio
           </Link>
           <Link
-            to={"/login"}
+            to={"/register"}
             className="text-center font-bold text-black transition-colors hover:text-[#e02957] hover:underline"
           >
-            Ya tengo una cuenta!
+            Crea una cuenta!
           </Link>
         </div>
       </section>

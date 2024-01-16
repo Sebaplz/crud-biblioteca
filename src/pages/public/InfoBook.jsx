@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import Loading from "../util/Loading";
-import { IconArrowBackUp } from "@tabler/icons-react";
-import Error from "../util/Error";
-import { useAuth } from "../auth/AuthProvider";
+import Loading from "../../util/Loading";
+import { IconArrowBackUp, IconDownload } from "@tabler/icons-react";
+import Error from "../../util/Error";
+import { useAuth } from "../../auth/AuthProvider";
 
 export default function InfoBook() {
   const [book, setBook] = useState([]);
@@ -24,6 +24,24 @@ export default function InfoBook() {
       setError("No se pudo cargar el libro seleccionado!");
     } finally {
       setIsLoading(false);
+    }
+  };
+
+  const handleDownload = async () => {
+    const options = {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+    };
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_URL_INCREASEDOWNLOADCOUNT}/${id}`,
+        options,
+      );
+      if (response.ok) {
+        print();
+      }
+    } catch (error) {
+      setError("No se pudo descargar el libro!");
     }
   };
 
@@ -59,16 +77,18 @@ export default function InfoBook() {
                     <p>Páginas: {book.pages}</p>
                     {userRol === "USER" ? (
                       <a
-                        className="cursor-pointer rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105"
-                        onClick={() => print()}
+                        className="flex cursor-pointer items-center gap-1 rounded-md bg-[#e02957] p-2 font-semibold text-white transition-transform hover:scale-105"
+                        onClick={handleDownload}
                       >
+                        <IconDownload color="white" size={20} />
                         Descargar
                       </a>
                     ) : (
                       <button
-                        className="rounded-md bg-[#e02957] p-2 font-semibold text-white disabled:bg-opacity-50"
+                        className="flex items-center gap-1 rounded-md bg-[#e02957] p-2 font-semibold text-white disabled:bg-opacity-50"
                         disabled
                       >
+                        <IconDownload color="white" size={20} />
                         Descargar
                       </button>
                     )}

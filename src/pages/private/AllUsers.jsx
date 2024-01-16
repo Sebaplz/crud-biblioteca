@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import Loading from "../util/Loading";
-import TableAllUsers from "../components/TableAllUsers";
-import Pagination from "../util/Pagination";
-import useApiData from "../hooks/useApiData";
+import Loading from "../../util/Loading";
+import TableAllUsers from "../../components/TableAllUsers";
+import Pagination from "../../util/Pagination";
+import useApiData from "../../hooks/useApiData";
 import { Link } from "react-router-dom";
 import { IconArrowBackUp } from "@tabler/icons-react";
 
