@@ -3,9 +3,12 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../auth/AuthProvider";
+import ToastError from "../../util/ToastError";
+import Toast from "../../util/Toast";
 
 const AddBook = () => {
-  const [info, setInfo] = useState(null);
+  const [message, setMessage] = useState(null);
+  const [error, setError] = useState(null);
   const {
     register,
     handleSubmit,
@@ -29,21 +32,23 @@ const AddBook = () => {
       );
 
       if (response.ok) {
-        setInfo("Libro agregado correctamente");
+        setMessage("Libro agregado correctamente");
         reset();
         setTimeout(() => {
-          setInfo(null);
-        }, 1000);
+          setMessage(null);
+        }, 2000);
       } else {
-        setInfo("Error al agregar el libro");
+        setError("Error al agregar el libro");
       }
     } catch (error) {
-      console.error("Error en la solicitud:", error);
+      setError("Error en la solicitud: ", error);
     }
   };
 
   return (
     <main className="mx-auto max-w-5xl px-4 pt-36 lg:px-0 lg:pt-40">
+      {message && <Toast message={message} />}
+      {error && <ToastError message={error} />}
       <div className="mb-4 flex lg:mb-0">
         <Link to={"/dashboard"}>
           <IconArrowBackUp color="#e02957" size={30} />
@@ -149,7 +154,6 @@ const AddBook = () => {
           Agregar Libro
         </button>
       </form>
-      {info && <p className="mt-4 text-center">{info}</p>}
     </main>
   );
 };

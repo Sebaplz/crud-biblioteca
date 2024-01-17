@@ -3,10 +3,13 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../auth/AuthProvider";
+import ToastError from "../../util/ToastError";
+import Toast from "../../util/Toast";
 
 const EditBook = () => {
   const { id } = useParams();
-  const [info, setInfo] = useState(null);
+  const [message, setMessage] = useState(null);
+  const [error, setError] = useState(null);
   const {
     register,
     handleSubmit,
@@ -51,12 +54,12 @@ const EditBook = () => {
       );
 
       if (response.ok) {
-        setInfo("Libro actualizado correctamente");
+        setMessage("Libro actualizado correctamente");
         setTimeout(() => {
           navigate("/dashboard");
         }, 1000);
       } else {
-        setInfo("Error al actualizar el libro");
+        setError("Error al actualizar el libro");
       }
     } catch (error) {
       console.error("Error en la solicitud:", error);
@@ -170,7 +173,8 @@ const EditBook = () => {
           Actualizar Libro
         </button>
       </form>
-      {info && <p className="mt-4 text-center">{info}</p>}
+      {message && <Toast message={message} />}
+      {error && <ToastError message={error} />}
     </main>
   );
 };

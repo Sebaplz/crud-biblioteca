@@ -3,6 +3,7 @@ import TableAllBooks from "../../components/TableAllBooks";
 import Loading from "../../util/Loading";
 import Pagination from "../../util/Pagination";
 import Toast from "../../util/Toast";
+import ToastError from "../../util/ToastError";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../auth/AuthProvider";
 import useApiData from "../../hooks/useApiData";
@@ -14,6 +15,7 @@ import {
 
 export default function DashboardPrivate() {
   const [message, setMessage] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
   const { data, isLoading, error, currentPage, totalPages, fetchData } =
     useApiData();
   const { email } = useAuth();
@@ -31,12 +33,12 @@ export default function DashboardPrivate() {
     try {
       const response = await fetch(url, options);
       const data = await response.json();
-      setMessage(data.message);
+      setMessage("Libro eliminado con exito!");
       setTimeout(() => {
         setMessage(null);
       }, 2000);
     } catch (error) {
-      console.error(error);
+      setErrorMessage(error);
     } finally {
       fetchData(import.meta.env.VITE_URL_ALLBOOKS, currentPage);
     }
@@ -53,7 +55,8 @@ export default function DashboardPrivate() {
         <Loading />
       ) : (
         <>
-          {message && <Toast />}
+          {message && <Toast message={message} />}
+          {errorMessage && <ToastError message={errorMessage} />}
           <main className="mx-auto max-w-5xl pt-32">
             <div className="flex justify-between">
               <div className="flex flex-wrap justify-center">
